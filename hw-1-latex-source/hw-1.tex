@@ -1,0 +1,162 @@
+\documentclass{exam}
+ 
+ \usepackage{graphicx}
+ \usepackage{float}
+ \usepackage{amsmath}
+ \usepackage[normalem]{ulem}
+ 
+% First we setup the header and footer
+\pagestyle{headandfoot}
+\runningheadrule
+\runningfootrule
+\header{COL351: Analysis and Design of Algorithms (CSE, IITD, Semester-I-2020-21)}{}{Homework-1}
+\footer{}{\thepage  \, of \numpages}{}
+ 
+% We want the points for each question displayed on the left
+%\pointname{points}
+%\pointsinmargin
+ 
+% Automatically total the points - make sure to compile TWICE
+\addpoints
+ 
+\begin{document}
+
+
+
+
+
+\vspace{0.1in}
+% Some general text together with number of questions and total points possible
+
+\vspace{0.1in}
+\hrule
+ \vspace{0.2in}
+
+
+
+
+
+\vspace{0.1in}
+Let the adj-list be the adjacency list provided to us. G is the graph, n = no. of nodes/vertices.
+
+
+$Claim:$ There will be no back edges in the graph.
+
+$Proof:$ Let's assume there is a back edge. Let the path be (A..... B and the back edge is from  B to A). Now that would mean that A is a prerequisite of B and then B is also a prerequisite of A. According to the problem statement, this is not possible. 
+
+According the theorem discussed in class, no back edges in a directed graph $=>$ the graph is a DAG.
+
+Step 1: Find the sources in the graph.
+
+For this, we will reverse the graph using the following algorithm.
+
+def rev(G)
+    rev-graph[n]
+    for all v in G
+        for all (v, u) in Edges:
+            rev-graph[u].append(v)
+            
+    return rev-graph
+
+This algorithm will give us the reverse graph and the sinks in this list will be the sources of the original adjacency list.
+
+Time complexity: $O(V + E)$, as we are going through all the vertices and edges.
+
+
+The following algorithm is to find out the maximum quarters minimum quarters required.
+
+def dfs(G):
+    min-quarters = -1
+    
+    for all sources in reversed adjacency list:
+        array[n] = {-1}
+        explore(G, v, array)
+        
+        if(array[source] > min_quarters):
+            min-quarters = array[source]
+            
+    return min-quarters
+    
+def explore(G, v, array):
+     
+    if v is a leaf:
+        array[v] = 1
+        
+    else:
+        var = false
+        
+        for all (v, u) in E:
+            if u is  not visited:
+                explore(G, u, array)
+                var = true
+                
+        if var == false:
+            maximum = -1
+            
+            for all (v, u) in E:
+                if(array[u] > maximum):
+                    maximum = array[u]
+                    
+            array[v] = maximum
+            
+Time complexity: This is an augmented dfs algorithm, with addition being a for loop through all the neighbours to find the max depth. So, as with the time complexity discussed in class for dfs, the time complexity for this algorithm will be $O(V+E).$
+\vspace{0.1in}
+
+
+
+
+\vspace{0.3in}
+
+
+Answer 4
+
+array[n] = {-1}
+
+def dfs(G,s):
+    
+    explore(G, s, array)
+            
+    
+    return array[s]
+    
+
+
+def explore(G, s, array):
+     
+    if s is a leaf:
+        array[s] = c[s]
+        
+    else:
+        var = false
+        
+        for all (s, u) in E:
+            if u is not visited:
+                explore(G, u, array)
+                var = true
+                
+        if var == false:
+            maximum = -1
+            
+            for all (v, u) in E:
+                if(array[u] > maximum):
+                    maximum = array[u]
+                    
+            array[s] = maximum + c[s]
+            
+Time complexity: This is an augmented dfs algorithm, with addition being a for loop through all the neighbours to find the max depth. So, as with the time complexity discussed in class for dfs, the time complexity for this algorithm will be $O(V+E).$
+
+
+Part B: 
+
+
+
+
+
+
+
+
+
+
+ 
+
+\end{document}
